@@ -9,14 +9,14 @@ namespace WebAPI.Controllers
     [ApiController]
     [Route("Products")]
     public class ProductController:ControllerBase{
-        private readonly IInMemProductRepo _inMemProductRepo;
+        private readonly IInMemProductRepo _productRepo;
         public ProductController(IInMemProductRepo inMemProductRepo)
         {
-            _inMemProductRepo=inMemProductRepo;
+            _productRepo=inMemProductRepo;
         }
         [HttpGet]
         public async  Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(){
-            var products=(await _inMemProductRepo.GetProductsAsync())
+            var products=(await _productRepo.GetProductsAsync())
                             .Select(p=>p.ToProductDTO());
             if (products is not null)
             {
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(Guid id){
-            var product=  await _inMemProductRepo.GetProductAsync(id);
+            var product=  await _productRepo.GetProductAsync(id);
             if (product is not null)
             {
                 return Ok(product.ToProductDTO());
@@ -41,12 +41,12 @@ namespace WebAPI.Controllers
                 Price=createProductDTO.Price,
                 CreatedTime=DateTime.Now,
             };
-            await  _inMemProductRepo.CreateProductAsync(product);
+            await  _productRepo.CreateProductAsync(product);
             return CreatedAtAction(nameof(GetProduct),new {id=product.Id},product.ToProductDTO());
         }
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProduct(Guid id,UpdateProductDTO updateProductDTO){
-            var product= await _inMemProductRepo.GetProductAsync(id);
+            var product= await _productRepo.GetProductAsync(id);
             if (product is null)
             {
                 return NotFound();
@@ -55,12 +55,12 @@ namespace WebAPI.Controllers
                 Name=updateProductDTO.Name,
                 Price=updateProductDTO.Price,
             };
-            await _inMemProductRepo.UpdateProductAsync(id,updatedProduct);
+            await _productRepo.UpdateProductAsync(id,updatedProduct);
             return NoContent();
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(Guid id){
-           await  _inMemProductRepo.DeleteProductAsync(id);
+           await  _productRepo.DeleteProductAsync(id);
             return NoContent();
         }
     }
