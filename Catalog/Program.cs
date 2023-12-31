@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using WebAPI.Catalog.Configuration;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using System.Runtime.InteropServices;
 var builder = WebApplication.CreateBuilder(args);
 
 //public configuration= builder.IConfiguration;
@@ -11,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 BsonSerializer.RegisterSerializer(new GuidSerializer(MongoDB.Bson.BsonType.String));
 BsonSerializer.RegisterSerializer(new DateTimeSerializer(MongoDB.Bson.BsonType.String));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(option =>
+option.SuppressAsyncSuffixInActionNames=false);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

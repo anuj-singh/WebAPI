@@ -27,7 +27,9 @@ namespace WebAPI.Catalog.Repositories.Implemntations
         public async Task<Product>? GetProductAsync(Guid id)
         {
             var product= products.FirstOrDefault(p=>p.Id==id);
+#pragma warning disable CS8603 // Possible null reference return.
             return await Task.FromResult(product);
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()

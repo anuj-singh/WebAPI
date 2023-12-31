@@ -26,7 +26,9 @@ namespace WebAPI.Controllers
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(Guid id){
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             var product=  await _productRepo.GetProductAsync(id);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             if (product is not null)
             {
                 return Ok(product.ToProductDTO());
@@ -46,7 +48,9 @@ namespace WebAPI.Controllers
         }
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProduct(Guid id,UpdateProductDTO updateProductDTO){
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             var product= await _productRepo.GetProductAsync(id);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             if (product is null)
             {
                 return NotFound();
