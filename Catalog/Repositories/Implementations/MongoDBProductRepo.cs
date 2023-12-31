@@ -18,32 +18,31 @@ namespace WebAPI.Catalog.Repositories.Implemntations
             productsCollection=database.GetCollection<Product>(collectionName);
             
         }
-        public void CreateProduct(Product product)
+        public async Task CreateProductAsync(Product product)
         {
-            productsCollection.InsertOne(product);
+            await productsCollection.InsertOneAsync(product);
         }
 
-        public void DeleteProduct(Guid id)
-        {
-            var filter=filterDefinitionBuilder.Eq(product=>product.Id, id);
-            productsCollection.DeleteOne(filter);
-        }
-
-        public Product? GetProduct(Guid id)
+        public async Task DeleteProductAsync(Guid id)
         {
             var filter=filterDefinitionBuilder.Eq(product=>product.Id, id);
-            return productsCollection.Find(filter).SingleOrDefault();
+            await productsCollection.DeleteOneAsync(filter);
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<Product>? GetProductAsync(Guid id)
         {
-            return productsCollection.Find(new BsonDocument()).ToList();
+            var filter=filterDefinitionBuilder.Eq(product=>product.Id, id);
+            return await productsCollection.Find(filter).SingleOrDefaultAsync();
+        }
+        public async Task<IEnumerable<Product>> GetProductsAsync()
+        {
+            return await productsCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public void UpdateProduct(Guid id, Product product)
+        public async Task UpdateProductAsync(Guid id, Product product)
         {
             var filter=filterDefinitionBuilder.Eq(i=>i.Id,id);
-            productsCollection.ReplaceOne(filter, product);
+            await productsCollection.ReplaceOneAsync(filter, product);
         }
     }
 }

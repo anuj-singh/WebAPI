@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
         [HttpGet]
         public ActionResult<IEnumerable<ProductDTO>> GetProducts(){
-            var products=_inMemProductRepo.GetProducts().Select(p=>p.ToProductDTO());
+            var products=_inMemProductRepo.GetProductsAsync().Select(p=>p.ToProductDTO());
             if (products is not null)
             {
                 return Ok(products);
@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         }
         [HttpGet("{id}")]
         public ActionResult<ProductDTO> GetProduct(Guid id){
-            var product= _inMemProductRepo.GetProduct(id);
+            var product= _inMemProductRepo.GetProductAsync(id);
             if (product is not null)
             {
                 return Ok(product.ToProductDTO());
@@ -40,12 +40,12 @@ namespace WebAPI.Controllers
                 Price=createProductDTO.Price,
                 CreatedTime=DateTime.Now,
             };
-            _inMemProductRepo.CreateProduct(product);
+            _inMemProductRepo.CreateProductAsync(product);
             return CreatedAtAction(nameof(GetProduct),new {id=product.Id},product.ToProductDTO());
         }
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(Guid id,UpdateProductDTO updateProductDTO){
-            var product=_inMemProductRepo.GetProduct(id);
+            var product=_inMemProductRepo.GetProductAsync(id);
             if (product is null)
             {
                 return NotFound();
@@ -54,12 +54,12 @@ namespace WebAPI.Controllers
                 Name=updateProductDTO.Name,
                 Price=updateProductDTO.Price,
             };
-            _inMemProductRepo.UpdateProduct(id,updatedProduct);
+            _inMemProductRepo.UpdateProductAsync(id,updatedProduct);
             return NoContent();
         }
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id){
-            _inMemProductRepo.DeleteProduct(id);
+            _inMemProductRepo.DeleteProductAsync(id);
             return NoContent();
         }
     }

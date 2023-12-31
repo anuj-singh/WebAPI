@@ -11,31 +11,35 @@ namespace WebAPI.Catalog.Repositories.Implemntations
             new Product{Id=Guid.NewGuid(),Name="Cricket Bat", Price=500, CreatedTime=DateTime.Now},
             new Product{Id=Guid.NewGuid(),Name="Cricket Kit", Price=2000, CreatedTime=DateTime.Now},
         };
-        public void CreateProduct(Product product)
+        public async Task CreateProductAsync(Product product)
         {
             products.Add(product);
+            await Task.CompletedTask;
         }
 
-        public void DeleteProduct(Guid id)
+        public async Task DeleteProductAsync(Guid id)
         {
             var index=products.FindIndex(p=>p.Id==id);
             products.RemoveAt(index);
+            await Task.CompletedTask;
         }
 
-        public Product? GetProduct(Guid id)
+        public async Task<Product>? GetProductAsync(Guid id)
         {
-            return products.FirstOrDefault(p=>p.Id==id);
+            var product= products.FirstOrDefault(p=>p.Id==id);
+            return await Task.FromResult(product);
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            return products;
+            return await Task.FromResult(products);
         }
 
-        public void UpdateProduct(Guid id,Product product)
+        public async Task UpdateProductAsync(Guid id,Product product)
         {
             var index= products.FindIndex(p=>p.Id==product.Id);
             products[index]=product;
+            await Task.CompletedTask;
         }
     }
 }

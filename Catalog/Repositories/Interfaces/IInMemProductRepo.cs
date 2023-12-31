@@ -1,10 +1,10 @@
 namespace WebAPI.Catalog.Repositories.Interfaces
 {
     public interface IInMemProductRepo{
-        Product? GetProduct(Guid id);
-        IEnumerable<Product> GetProducts();
-        void CreateProduct(Product product);
-        void UpdateProduct(Guid id,Product product);
-        void DeleteProduct(Guid id);
+        Task<Product>? GetProductAsync(Guid id);
+        Task<IEnumerable<Product>> GetProductsAsync();
+        Task CreateProductAsync(Product product);
+        Task UpdateProductAsync(Guid id,Product product);
+        Task DeleteProductAsync(Guid id);
     }
 }
