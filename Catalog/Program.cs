@@ -18,13 +18,15 @@ option.SuppressAsyncSuffixInActionNames=false);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IInMemProductRepo,MongoDBProductRepo>();
-builder.Services.AddSingleton<IMongoClient>(ServiceProvider=>{
-    var settings=builder.Configuration
+var mongoDbSettings=builder.Configuration
     .GetSection(nameof(MongoDbSettings))
     .Get<MongoDbSettings>();
-    return new MongoClient(settings.ConnectionString);
+builder.Services.AddSingleton<IMongoClient>(ServiceProvider=>{
+    
+    return new MongoClient(mongoDbSettings.ConnectionString);
 });
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+.AddMongoDb(mongoDbSettings.ConnectionString,name: "mongo",timeout:TimeSpan.FromSeconds(3));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

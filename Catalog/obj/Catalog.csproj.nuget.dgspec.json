@@ -50,6 +50,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "aspnetcore.healthchecks.mongodb": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
