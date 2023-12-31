@@ -25,3 +25,16 @@ D:\WebAPI\WebAPI\Catalog\obj\Debug\net6.0\refint\Catalog.dll
 D:\WebAPI\WebAPI\Catalog\obj\Debug\net6.0\Catalog.pdb
 D:\WebAPI\WebAPI\Catalog\obj\Debug\net6.0\Catalog.genruntimeconfig.cache
 D:\WebAPI\WebAPI\Catalog\obj\Debug\net6.0\ref\Catalog.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\AWSSDK.Core.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\DnsClient.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\MongoDB.Bson.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\MongoDB.Driver.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\MongoDB.Driver.Core.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\SharpCompress.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\Snappier.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\ZstdSharp.dll
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
+D:\WebAPI\WebAPI\Catalog\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
